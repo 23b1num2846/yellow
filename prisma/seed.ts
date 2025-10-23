@@ -1,9 +1,7 @@
-// prisma/seed.ts
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function main() {
-  // Category
   const food = await prisma.category.upsert({
     where: { id: '1' },
     update: {},
@@ -139,6 +137,6 @@ async function main() {
 }
 
 main()
-  .then(() => console.log('✅ Seeded 10 businesses!'))
+  .then(() => console.log('Cmooon 10 business'))
   .catch((e) => console.error(e))
   .finally(async () => await prisma.$disconnect());

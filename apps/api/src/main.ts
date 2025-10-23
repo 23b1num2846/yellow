@@ -42,7 +42,7 @@ app.get("/categories", async () => {
 const start = async () => {
   try {
     await app.listen({ port: Number(env.PORT), host: "0.0.0.0" });
-    console.log("🚀 API ready on http://localhost:5050");
+    console.log("Cmooooon");
   } catch (err) {
     app.log.error(err);
     process.exit(1);
