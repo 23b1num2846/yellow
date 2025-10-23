@@ -39,7 +39,7 @@ export default function HomePage() {
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
       <ul>
-        {businesses.map((b) => (
+        {businesses.map((b: Business) => (
           <li key={b.id} style={{ margin: '8px 0' }}>
             <strong>{b.name}</strong> — {b.description}
             <br />
