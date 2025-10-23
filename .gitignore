@@ -46,3 +46,12 @@ Thumbs.db
 # Next.js
 .next
 out
+
+node_modules
+dist
+tmp
+.env
+.prisma
+coverage
+.DS_Store
+nx-cache
