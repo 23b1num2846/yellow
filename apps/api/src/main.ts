@@ -1,8 +1,8 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
 import { PrismaClient } from "@prisma/client";
-import { BusinessSchema, CategorySchema } from "@yellow/contract"; // path тааруулах хэрэгтэй
-
+import { BusinessSchema, CategorySchema } from "@yellow/contract"; 
+import { env } from "@yellow/config";
 const app = Fastify({ logger: true });
 const prisma = new PrismaClient();
 
@@ -41,7 +41,7 @@ app.get("/categories", async () => {
 
 const start = async () => {
   try {
-    await app.listen({ port: 5050, host: "0.0.0.0" });
+    await app.listen({ port: Number(env.PORT), host: "0.0.0.0" });
     console.log("🚀 API ready on http://localhost:5050");
   } catch (err) {
     app.log.error(err);
