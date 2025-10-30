@@ -8,7 +8,15 @@ async function main() {
     create: { id: '1', name: 'Хоол' },
   });
 
-  const data = [
+  const users = await prisma.user.createMany({
+    data: [
+      { id: 'u1', name: 'Бат', password: 'hashedpass1' },
+      { id: 'u2', name: 'Сараа', password: 'hashedpass2' },
+    ],
+    skipDuplicates: true,
+  });
+
+const data = [
     {
       name: 'Modern Nomads',
       description: 'Монгол үндэсний хоолны сүлжээ ресторан',
@@ -131,12 +139,59 @@ async function main() {
     },
   ];
 
+  // Clear old data
+  await prisma.review.deleteMany();
+  await prisma.business.deleteMany();
+
   for (const b of data) {
-    await prisma.business.create({ data: { ...b, categoryId: food.id } });
+    await prisma.business.create({
+      data: { ...b, categoryId: food.id },
+    });
   }
+
+  console.log('✅ Seeded 3 businesses');
+
+  // --- Reviews ---
+  const allBusinesses = await prisma.business.findMany();
+
+  const reviews = [
+    {
+      post: 'Хоол амттай, үйлчилгээ сайтай!',
+      score: 5,
+      userId: 'u1',
+      businessId: allBusinesses[0].id,
+    },
+    {
+      post: 'Орчин нь таалагдсан, гэхдээ пицца жаахан хатуу байсан.',
+      score: 4,
+      userId: 'u2',
+      businessId: allBusinesses[0].id,
+    },
+    {
+      post: 'Үйлчилгээ маш хурдан байлаа!',
+      score: 5,
+      userId: 'u2',
+      businessId: allBusinesses[1].id,
+    },
+    {
+      post: 'Маш гоё уур амьсгалтай газар.',
+      score: 5,
+      userId: 'u1',
+      businessId: allBusinesses[2].id,
+    },
+  ];
+
+  for (const r of reviews) {
+    await prisma.review.create({ data: r });
+  }
+
+  console.log('✅ Added demo users + reviews');
 }
 
 main()
-  .then(() => console.log('Cmooon 10 business'))
+  .then(() => console.log('🎉 Database seeded successfully!'))
   .catch((e) => console.error(e))
   .finally(async () => await prisma.$disconnect());
+
+
+  

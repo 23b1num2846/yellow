@@ -27,4 +27,22 @@ model Business {
   timetable    String
   categoryId   String
   category     Category  @relation(fields: [categoryId], references: [id])
+  reviews Review[]
+}
+
+model Review {
+  id          String   @id @default(cuid())
+  post        String
+  score       Int
+  userId      String
+  businessId  String
+  user        User      @relation(fields: [userId], references: [id])
+  business    Business  @relation(fields: [businessId], references: [id])
+}
+
+model User {
+  id String @id @default(cuid())
+  name String
+  password String
+  reviews Review[]
 }

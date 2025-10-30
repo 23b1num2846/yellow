@@ -1,7 +1,7 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
 import { PrismaClient } from "@prisma/client";
-import { BusinessSchema, CategorySchema } from "@yellow/contract"; 
+import { BusinessSchema, CategorySchema, ReviewSchema } from "@yellow/contract"; 
 import { env } from "@yellow/config";
 const app = Fastify({ logger: true });
 const prisma = new PrismaClient();
@@ -37,6 +37,25 @@ app.post("/businesses", async (req, reply) => {
 
 app.get("/categories", async () => {
   return await prisma.category.findMany();
+});
+
+app.get("/businesses/:id/reviews", async (req, reply) => {
+  const { id } = req.params as { id: string };
+  const reviews = await prisma.review.findMany({
+    where: { businessId: id },
+    include: { user: { select: { name: true } } },
+  });
+  return reviews;
+});
+
+app.post("/businesses/:id/reviews", async (req, reply) => {
+  try {
+    const parsed = ReviewSchema.parse(req.body);
+    const newReview = await prisma.review.create({ data: parsed });
+    return reply.status(201).send(newReview);
+  } catch (err: any) {
+    return reply.status(400).send({ message: err.message });
+  }
 });
 
 const start = async () => {

@@ -1,17 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
 import { z } from "zod";
 import { BusinessSchema } from "@yellow/contract";
+import Reviews from "../../components/Review";
+
 
 export const revalidate = 60;
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-export default async function BusinessDetails({ params }: { params: Promise<{ id: string }> }) {
-  // 🟢 params-г заавал await хийж задлана
+export default async function BusinessDetails({ params }: { params: { id: string } })
+ {
   const { id } = await params;
 
   const res = await fetch(`${apiUrl}/businesses/${id}`, {
     next: { revalidate: 60 },
   });
+
+  
 
   if (!res.ok) {
     throw new Error("Failed to fetch business data");
@@ -83,6 +87,7 @@ export default async function BusinessDetails({ params }: { params: Promise<{ id
           </div>
         </div>
       </section>
+      <Reviews businessId={business.id} />
     </main>
   );
 }

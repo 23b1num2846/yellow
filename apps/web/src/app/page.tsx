@@ -1,52 +1,47 @@
-/* eslint-disable @next/next/no-img-element */
-'use client';
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { z } from 'zod';
-import { BusinessSchema } from '@yellow/contract';
 
-const BusinessListSchema = z.array(BusinessSchema);
-type Business = z.infer<typeof BusinessSchema>;
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+import { Suspense } from "react";
+import { z } from "zod";
+import { BusinessSchema } from "@yellow/contract";
 
-export default function BusinessesPage({ params }: { params: Promise<{ id: string }> }) {
-  const [businesses, setBusinesses] = useState<Business[]>([]);
+export const revalidate = 60; // ISR
 
-  useEffect(() => {
-    fetch(`${apiUrl}/businesses`)
-      .then((res) => res.json())
-      .then((json) => setBusinesses(BusinessListSchema.parse(json)))
-      .catch(console.error);
-  }, []);
+const ListSchema = z.array(BusinessSchema);
+const API = process.env.NEXT_PUBLIC_API_URL!;
+
+async function BooksList() {
+  const res = await fetch(`${API}/businesses`, {
+    next: { revalidate: 60 },
+  });
+  const json = await res.json();
+  const data = ListSchema.parse(json);
 
   return (
-    <main className="p-12 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold mb-8 text-gray-800">Байгууллагууд</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {businesses.map((b) => (
-          <Link
-            key={b.id}
-            href={`/businesses/${b.id}`}
-            className="bg-white rounded-2xl shadow hover:shadow-lg transition p-6 flex flex-col items-start"
-          >
-            <img
-              src="/static/logo-default.png"
-              alt="Company Logo"
-              className="h-16 mb-4"
-            />
-            <h2 className="text-lg font-semibold text-yellow-700">{b.name}</h2>
-            <p className="text-gray-600 mt-1">{b.address}</p>
-            <p className="text-gray-500 mt-2">📞 {b.phone}</p>
-            <a
-              href={b.website}
-              target="_blank"
-              className="text-yellow-600 mt-2 hover:underline"
-            >
-              🌐 {b.website.replace(/^https?:\/\//, '')}
-            </a>
-          </Link>
-        ))}
-      </div>
+    <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {data.map((b) => (
+        <li key={b.id} className="rounded-2xl bg-white p-6 shadow">
+          <img src="/static/logo-default.png" alt="logo" className="h-12 mb-3" />
+          <a className="text-lg font-semibold text-yellow-700 hover:underline"
+             href={`/businesses/${b.id}`}>
+            {b.name}
+          </a>
+          <p className="text-gray-600 mt-1">{b.address}</p>
+          <p className="text-gray-500">📞 {b.phone}</p>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export default async function Page() {
+  return (
+    <main className="max-w-6xl mx-auto p-8">
+      <h1 className="text-3xl font-bold mb-6">Yellow Books</h1>
+
+     
+      <Suspense fallback={<div className="animate-pulse text-gray-500">Жагсаалт ачааллаж байна…</div>}>
+     
+        <BooksList />
+      </Suspense>
     </main>
   );
 }
