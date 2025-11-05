@@ -35,7 +35,7 @@ export default async function BusinessDetails({ params }: { params: { id: string
                     />
           <div>
             <h1 className="text-3xl font-bold text-yellow-600">{business.name}</h1>
-            <p className="text-gray-500 mt-1">{business.timetable}</p>
+            <p className="text-gray-500 mt-1">{business.timetable}cmon</p>
           </div>
         </div>
 
