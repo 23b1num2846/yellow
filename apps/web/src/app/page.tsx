@@ -3,9 +3,10 @@ import { z } from 'zod';
 import { BusinessSchema } from '@yellow/contract';
 import Image from 'next/image';
 
-export const revalidate = 60; // ✅ ISR
+export const revalidate = 60;
 
 const ListSchema = z.array(BusinessSchema);
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const API = process.env.NEXT_PUBLIC_API_URL!;
 
 async function BooksList() {

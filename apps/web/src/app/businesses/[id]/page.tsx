@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-import { z } from "zod";
 import { BusinessSchema } from "@yellow/contract";
 import Reviews from "../../components/Review";
 import Image from 'next/image';

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Review } from '@yellow/contract';
+import Image from 'next/image';
 
 export default function Reviews({ businessId }: { businessId: string }) {
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -17,15 +18,15 @@ export default function Reviews({ businessId }: { businessId: string }) {
         if (!res.ok) throw new Error('Failed to fetch reviews');
         const data = await res.json();
         setReviews(data);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (error:any) {
+        setError(error);
       } finally {
         setLoading(false);
       }
     }
 
     fetchReviews();
-  }, [API, businessId]);
+  }, [API, businessId, error]);
 
   if (loading) return <p className="text-gray-500">Сэтгэгдэл ачаалж байна...</p>;
   if (error) return <p className="text-red-500">Алдаа: {error}</p>;
@@ -49,7 +50,7 @@ export default function Reviews({ businessId }: { businessId: string }) {
             className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200"
           >
             <div className="flex items-center gap-3 px-5 pt-5">
-              <img
+              <Image
                 src="/static/default-user.jpg"
                 alt="user avatar"
                 className="w-10 h-10 rounded-full border"

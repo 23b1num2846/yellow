@@ -28,6 +28,7 @@ export type Business = z.infer<typeof BusinessSchema>;
 
 
 export const ReviewSchema = z.object({
+  id: z.string(),
   post: z.string().min(1),
   score: z.number().min(1).max(5),
   userId: z.string(),

@@ -3,10 +3,11 @@
 import dynamic from 'next/dynamic';
 import { z } from 'zod';
 import { BusinessSchema } from '@yellow/contract';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const Map = dynamic(() => import('../components/Map'), { ssr: false });
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ListSchema = z.array(BusinessSchema);
 
 export default function ClientPage({ data }: { data: z.infer<typeof ListSchema> }) {

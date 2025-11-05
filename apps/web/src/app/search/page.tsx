@@ -5,6 +5,7 @@ import ClientPage from './ClientPage';
 export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
 
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const API = process.env.NEXT_PUBLIC_API_URL!;
 const ListSchema = z.array(BusinessSchema);
 
