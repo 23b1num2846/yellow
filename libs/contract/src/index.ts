@@ -21,6 +21,7 @@ export const BusinessSchema = z.object({
   instagramUrl: z.string().url(),
   timetable: z.string(),
   categoryId: z.string(),
+  logoUrl: z.string()
 });
 
 export type Business = z.infer<typeof BusinessSchema>;

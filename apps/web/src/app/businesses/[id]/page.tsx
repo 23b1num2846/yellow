@@ -2,7 +2,7 @@
 import { z } from "zod";
 import { BusinessSchema } from "@yellow/contract";
 import Reviews from "../../components/Review";
-
+import Image from 'next/image';
 
 export const revalidate = 60;
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -28,11 +28,13 @@ export default async function BusinessDetails({ params }: { params: { id: string
     <main className="max-w-4xl mx-auto py-12 px-6">
       <section className="bg-white shadow-lg rounded-2xl p-8">
         <div className="flex items-center gap-6">
-          <img
-            src="/static/logo-default.png"
-            alt="Logo"
-            className="h-20 w-20 object-contain rounded-md border"
-          />
+          <Image
+                      src={business.logoUrl || '/static/logo-default.png'}
+                      width={200}
+                      height={200}
+                      alt={business.name}
+                      className="rounded-md object-cover mb-2"
+                    />
           <div>
             <h1 className="text-3xl font-bold text-yellow-600">{business.name}</h1>
             <p className="text-gray-500 mt-1">{business.timetable}</p>

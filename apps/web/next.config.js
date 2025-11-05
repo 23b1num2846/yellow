@@ -9,8 +9,20 @@ const { composePlugins, withNx } = require('@nx/next');
 const nextConfig = {
   // Use this to set Nx-specific options
   // See: https://nx.dev/recipes/next/next-config-setup
+
   nx: {},
+   images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "yellowbook-assets.s3.ap-southeast-1.amazonaws.com",
+        
+      },
+    ],
+  },
 };
+
+
 
 const plugins = [
   // Add more Next.js plugins to this list if needed.

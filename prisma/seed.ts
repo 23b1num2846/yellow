@@ -28,6 +28,8 @@ const data = [
       facebookUrl: 'https://facebook.com/modernnomads',
       instagramUrl: 'https://instagram.com/modernnomads',
       timetable: '10:00–22:00',
+      logoUrl: 'https://yellowbook-assets.s3.ap-southeast-1.amazonaws.com/nomads_logo.png',
+      categoryId: food.id,
     },
     {
       name: 'BD’s Mongolian BBQ',
@@ -40,6 +42,8 @@ const data = [
       facebookUrl: 'https://facebook.com/bdsmongolia',
       instagramUrl: 'https://instagram.com/bdsmongolia',
       timetable: '11:00–23:00',
+      logoUrl: 'https://yellowbook-assets.s3.ap-southeast-1.amazonaws.com/8c0058533b75d83074fb2d54b41789f8.jpg',
+      categoryId: food.id,
     },
     {
       name: 'Khaan Deli',
@@ -52,6 +56,8 @@ const data = [
       facebookUrl: 'https://facebook.com/khaandeli',
       instagramUrl: 'https://instagram.com/khaandeli',
       timetable: '09:00–22:00',
+      logoUrl: 'https://yellowbook-assets.s3.ap-southeast-1.amazonaws.com/300786139_533820001877874_8270612961028424860_n.jpg',
+      categoryId: food.id,
     },
     {
       name: 'Terelj Lodge',
@@ -64,6 +70,8 @@ const data = [
       facebookUrl: 'https://facebook.com/tereljlodge',
       instagramUrl: 'https://instagram.com/tereljlodge',
       timetable: '09:00–21:00',
+      logoUrl: 'https://yellowbook-assets.s3.ap-southeast-1.amazonaws.com/afb4a3a399435f242d56d3744fce31352dd065d3.jpg',
+      categoryId: food.id,
     },
     {
       name: 'Veranda Restaurant',
@@ -76,6 +84,8 @@ const data = [
       facebookUrl: 'https://facebook.com/verandamn',
       instagramUrl: 'https://instagram.com/verandamn',
       timetable: '10:00–23:00',
+      logoUrl: 'https://yellowbook-assets.s3.ap-southeast-1.amazonaws.com/327321189_845558033182105_8650319850063531882_n.jpg',
+      categoryId: food.id,
     },
     {
       name: 'Korean House',
@@ -88,6 +98,8 @@ const data = [
       facebookUrl: 'https://facebook.com/koreanhousemn',
       instagramUrl: 'https://instagram.com/koreanhousemn',
       timetable: '11:00–22:00',
+      logoUrl: 'https://yellowbook-assets.s3.ap-southeast-1.amazonaws.com/300369248_440434354769732_5644287063389513545_n.png',
+      categoryId: food.id,
     },
     {
       name: 'Sakura Sushi',
@@ -100,6 +112,8 @@ const data = [
       facebookUrl: 'https://facebook.com/sushisakura',
       instagramUrl: 'https://instagram.com/sushisakura',
       timetable: '10:00–22:00',
+      logoUrl: 'https://yellowbook-assets.s3.ap-southeast-1.amazonaws.com/400307983_308549241933516_1421583180728908731_n.jpg',
+      categoryId: food.id,
     },
     {
       name: 'The Bull Hotpot',
@@ -112,18 +126,8 @@ const data = [
       facebookUrl: 'https://facebook.com/bullhotpot',
       instagramUrl: 'https://instagram.com/bullhotpot',
       timetable: '11:00–23:30',
-    },
-    {
-      name: 'PizzaHut Mongolia',
-      description: 'Пицца, паста, шарсан хоолны газар',
-      address: 'УБ, БГД, Max Mall дотор',
-      phone: '77007700',
-      email: 'info@pizzahut.mn',
-      website: 'https://pizzahut.mn',
-      location: 'Улаанбаатар',
-      facebookUrl: 'https://facebook.com/pizzahutmn',
-      instagramUrl: 'https://instagram.com/pizzahutmn',
-      timetable: '10:00–22:00',
+      logoUrl: 'https://yellowbook-assets.s3.ap-southeast-1.amazonaws.com/472728802_896588756022136_3658598468207927959_n.jpg',
+      categoryId: food.id,
     },
     {
       name: 'Silk Road Tea House',
@@ -136,6 +140,8 @@ const data = [
       facebookUrl: 'https://facebook.com/silkroadtea',
       instagramUrl: 'https://instagram.com/silkroadtea',
       timetable: '09:00–22:00',
+      logoUrl: 'https://yellowbook-assets.s3.ap-southeast-1.amazonaws.com/5d413032625e7fdb4d1b1523_srs-logo-p-500.png',
+      categoryId: food.id,
     },
   ];
 

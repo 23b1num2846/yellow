@@ -47,9 +47,13 @@
     "zod": "^4.1.12"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.921.0",
+    "@aws-sdk/s3-request-presigner": "^3.921.0",
     "@fastify/autoload": "~6.0.3",
     "@fastify/cors": "^11.1.0",
+    "@fastify/multipart": "^9.3.0",
     "@fastify/sensible": "~6.0.2",
+    "dotenv": "^17.2.3",
     "fastify": "^5.6.1",
     "fastify-plugin": "~5.0.1",
     "leaflet": "^1.9.4",
@@ -59,6 +63,6 @@
     "react-leaflet": "^5.0.0"
   },
   "prisma": {
-    "seed": "npm run seed --workspace=prisma"
+    "seed": "ts-node prisma/seed.ts"
   }
 }
