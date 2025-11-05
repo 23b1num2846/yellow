@@ -26,14 +26,17 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
+      - name: Install Nx CLI globally
+        run: npm install -g nx
+
       - name: Lint
-        run: npx nx run-many -t lint
+        run: nx run-many -t lint
 
       - name: Build
-        run: npx nx run-many -t build
+        run: nx run-many -t build
 
       - name: Test (optional)
-        run: npx nx run-many -t test || echo "No tests found"
+        run: nx run-many -t test || echo "No tests found"
 
       - name: Verify
         run: echo "✅ Monorepo CI pipeline passed successfully!"
