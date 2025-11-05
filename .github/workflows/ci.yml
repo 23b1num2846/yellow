@@ -6,9 +6,6 @@ on:
       - main
   pull_request:
 
-env:
-  NODE_ENV: production
-  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -30,13 +27,13 @@ jobs:
         run: npm install -g nx
 
       - name: Lint
-        run: nx run-many -t lint
+        run: npx nx run-many -t lint test build
 
       - name: Build
-        run: nx run-many -t build
+        run: npx nx run-many -t build
 
       - name: Test (optional)
-        run: nx run-many -t test || echo "No tests found"
+        run: npx nx run-many -t test || echo "No tests found"
 
       - name: Verify
         run: echo "✅ Monorepo CI pipeline passed successfully!"
