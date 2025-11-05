@@ -18,6 +18,7 @@ export default function Reviews({ businessId }: { businessId: string }) {
         if (!res.ok) throw new Error('Failed to fetch reviews');
         const data = await res.json();
         setReviews(data);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error:any) {
         setError(error);
       } finally {

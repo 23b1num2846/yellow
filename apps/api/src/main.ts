@@ -4,7 +4,7 @@ import fastifyMultipart from "@fastify/multipart";
 import { PrismaClient } from "@prisma/client";
 import { randomUUID } from "crypto";
 import { config } from "dotenv";
-import { BusinessSchema, CategorySchema, ReviewSchema } from "@yellow/contract";
+import { BusinessSchema, ReviewSchema } from "@yellow/contract";
 import { env } from "@yellow/config";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
@@ -20,9 +20,12 @@ app.register(fastifyMultipart);
 
 // 🔹 Configure AWS SDK
 const s3 = new S3Client({
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   region: process.env.AWS_REGION!,
   credentials: {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
   },
 });
@@ -54,6 +57,7 @@ app.post("/businesses", async (req, reply) => {
     const parsed = BusinessSchema.parse(req.body);
     const newBusiness = await prisma.business.create({ data: parsed });
     return reply.status(201).send(newBusiness);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     return reply.status(400).send({ message: err.message });
   }
@@ -65,7 +69,7 @@ app.get("/categories", async () => {
 });
 
 // ✅ Get reviews of one business
-app.get("/businesses/:id/reviews", async (req, reply) => {
+app.get("/businesses/:id/reviews", async (req) => {
   const { id } = req.params as { id: string };
   const reviews = await prisma.review.findMany({
     where: { businessId: id },
@@ -80,6 +84,7 @@ app.post("/businesses/:id/reviews", async (req, reply) => {
     const parsed = ReviewSchema.parse(req.body);
     const newReview = await prisma.review.create({ data: parsed });
     return reply.status(201).send(newReview);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     return reply.status(400).send({ message: err.message });
   }
@@ -96,6 +101,7 @@ app.post("/upload", async (req, reply) => {
   try {
     await s3.send(
       new PutObjectCommand({
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         Bucket: process.env.AWS_BUCKET_NAME!,
         Key: key,
         Body: buffer,
@@ -118,7 +124,7 @@ app.post("/upload", async (req, reply) => {
 const start = async () => {
   try {
     await app.listen({ port: Number(env.PORT) || 5050, host: "0.0.0.0" });
-    console.log(`🚀 API ready on http://localhost:${env.PORT || 5050}`);
+    console.log(` API ready on http://localhost:${env.PORT || 5050}`);
   } catch (err) {
     app.log.error(err);
     process.exit(1);
