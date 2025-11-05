@@ -22,20 +22,10 @@
         "watchDepsTargetName": "watch-deps"
       }
     },
-    {
-      "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "lint"
-      }
-    }
+    { "plugin": "@nx/eslint/plugin", "options": { "targetName": "lint" } }
   ],
   "generators": {
-    "@nx/next": {
-      "application": {
-        "style": "tailwind",
-        "linter": "eslint"
-      }
-    }
+    "@nx/next": { "application": { "style": "tailwind", "linter": "eslint" } }
   },
   "targetDefaults": {
     "@nx/esbuild:esbuild": {
@@ -44,11 +34,7 @@
       "inputs": ["production", "^production"]
     }
   },
-  "pluginsConfig": {
-    "excludedDirs": ["prisma"]
-  },
-  "workspaceLayout": {
-    "appsDir": "apps",
-    "libsDir": "libs"
-  }
+  "pluginsConfig": { "excludedDirs": ["prisma"] },
+  "workspaceLayout": { "appsDir": "apps", "libsDir": "libs" },
+  "nxCloudId": "690ab04b4beabea108ef74fc"
 }
