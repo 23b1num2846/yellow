@@ -148,6 +148,7 @@ const data = [
   // Clear old data
   await prisma.review.deleteMany();
   await prisma.business.deleteMany();
+  await prisma.users.deleteMany();
 
   for (const b of data) {
     await prisma.business.create({
