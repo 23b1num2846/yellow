@@ -2,9 +2,14 @@
   "name": "@yellow/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {
-    "seed": "npx prisma db seed"
-  },
+   
+    "scripts": {
+       "seed": "npx prisma db seed",
+  "lint": "nx run-many -t lint",
+  "build": "nx run-many -t build"
+},
+
+  
   "private": true,
   "devDependencies": {
     "@eslint/compat": "^1.1.1",
